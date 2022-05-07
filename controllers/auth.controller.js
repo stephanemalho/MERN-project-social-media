@@ -11,4 +11,4 @@ module.exports.signUp = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 }
-// reprendre à 47 min la vidéo 
+// reprendre à 47 min 
