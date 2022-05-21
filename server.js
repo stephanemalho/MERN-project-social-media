@@ -6,9 +6,20 @@ const postRoutes = require("./routes/post.route"); //importation de postRoutes
 require("dotenv").config({ path: "./config/.env" }); //importation de dotenv
 require("./config/db"); //importation de la base de données
 const { checkUser , requireAuth } = require("./middleware/auth.middleware"); //import de checkUser
+const cors = require("cors"); //import de cors
+
 const app = express(); //création de l'application
 
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  'allowedHeaders': ['sessionId','Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'methode': ['GET','HEAD','PUT','POST','DELETE','PATCH'],
+  'preflightContinue': false
+}
 
+app.use(cors(corsOptions)); //utilisation de cors
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended:true})); // support encoded bodies
 app.use(cookieParser()); // support cookie

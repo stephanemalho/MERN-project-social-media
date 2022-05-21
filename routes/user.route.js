@@ -1,6 +1,9 @@
 const router = require('express').Router(); //call express router
 const authController = require('../controllers/auth.controller');
 const userController = require('../controllers/user.controller');
+const uploadController = require('../controllers/upload.controller');
+const multer = require('multer');
+const upload = multer();
 
 
 //auth concerne l'authentification du user
@@ -16,6 +19,8 @@ router.delete("/:id", userController.deleteUser);
 router.patch('/follow/:id', userController.follow);
 router.patch('/unfollow/:id', userController.unfollow);
 
-module.exports = router;
+//upload
+router.post("/upload", upload.single('file') , uploadController.uploadProfilPicture);
 
-// reprendre à 1H00
+
+module.exports = router;
